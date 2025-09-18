@@ -16,50 +16,62 @@ function Timeline() {
             className="vertical-timeline-element--work"
             contentStyle={{ background: 'white', color: 'rgb(39, 40, 34)' }}
             contentArrowStyle={{ borderRight: '7px solid  white' }}
-            date="2022 - present"
+            date="2023 - present"
             iconStyle={{ background: '#5000ca', color: 'rgb(39, 40, 34)' }}
             icon={<FontAwesomeIcon icon={faBriefcase} />}
           >
-            <h3 className="vertical-timeline-element-title">Technology Consultant</h3>
-            <h4 className="vertical-timeline-element-subtitle">Dallas, TX</h4>
+            <h3 className="vertical-timeline-element-title">ICT Consultant</h3>
+            <h4 className="vertical-timeline-element-subtitle">Subatech Enterprises, KE</h4>
             <p>
-              Full-stack Web Development, GenAI/LLM, Project Management, Business Development
+              Full-stack Web Development, Mobile Applications Development Project Management, Business Development, Graphics Design, Digital Branding.
             </p>
           </VerticalTimelineElement>
           <VerticalTimelineElement
             className="vertical-timeline-element--work"
-            date="2020 - 2022"
+            date="2020 - 2023"
             iconStyle={{ background: '#5000ca', color: 'rgb(39, 40, 34)' }}
             icon={<FontAwesomeIcon icon={faBriefcase} />}
           >
-            <h3 className="vertical-timeline-element-title">Full Stack Engineer</h3>
-            <h4 className="vertical-timeline-element-subtitle">Laie, HI</h4>
+            <h3 className="vertical-timeline-element-title">Micro-Services Developer</h3>
+            <h4 className="vertical-timeline-element-subtitle">Kenya Revenue Authority, KE</h4>
             <p>
-              Frontend Development, Backend Development, User Experience, Team Leading
+              Frontend Development, Backend Development, User Experience, Team Leading, UI/UX Design.
             </p>
           </VerticalTimelineElement>
           <VerticalTimelineElement
             className="vertical-timeline-element--work"
-            date="2021 - 2021"
+            date="2019 - 2020"
             iconStyle={{ background: '#5000ca', color: 'rgb(39, 40, 34)' }}
             icon={<FontAwesomeIcon icon={faBriefcase} />}
           >
-            <h3 className="vertical-timeline-element-title">Staff Engineer Intern</h3>
-            <h4 className="vertical-timeline-element-subtitle">Laie, HI</h4>
+            <h3 className="vertical-timeline-element-title">Applications Developer</h3>
+            <h4 className="vertical-timeline-element-subtitle">ICT Authority, KE</h4>
             <p>
               Full-stack Development, API Development, User Experience
             </p>
           </VerticalTimelineElement>
           <VerticalTimelineElement
             className="vertical-timeline-element--work"
-            date="2020 - 2020"
+            date="2018 - 2019"
             iconStyle={{ background: '#5000ca', color: 'rgb(39, 40, 34)' }}
             icon={<FontAwesomeIcon icon={faBriefcase} />}
           >
-            <h3 className="vertical-timeline-element-title">Data Analyst Intern</h3>
-            <h4 className="vertical-timeline-element-subtitle">Tokyo, Japan</h4>
+            <h3 className="vertical-timeline-element-title">IT Support Specialist</h3>
+            <h4 className="vertical-timeline-element-subtitle">Unicool International LTD, KE</h4>
             <p>
-              Automation, Data Governance, Statistical Analysis
+              Web Design & Development, Data Governance, Hardware Maintenance, User Actice Directory Management.
+            </p>
+          </VerticalTimelineElement>
+          <VerticalTimelineElement
+            className="vertical-timeline-element--work"
+            date="2017 - 2018"
+            iconStyle={{ background: '#5000ca', color: 'rgb(39, 40, 34)' }}
+            icon={<FontAwesomeIcon icon={faBriefcase} />}
+          >
+            <h3 className="vertical-timeline-element-title">IT Support Intern</h3>
+            <h4 className="vertical-timeline-element-subtitle">Communications Authority, KE</h4>
+            <p>
+              Data Governance, Computer Harware Configuration & Maintenance, Software Maintenace,User Actice Directory Management.
             </p>
           </VerticalTimelineElement>
         </VerticalTimeline>
