@@ -1,63 +1,45 @@
-import React, { useRef, useState } from 'react';
-import '../assets/styles/Contact.scss';
-import emailjs from '@emailjs/browser';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
-import TextField from '@mui/material/TextField';
+import React, { useRef } from "react";
+import emailjs from "@emailjs/browser";
+import styled from "styled-components";
 
-function Contact() {
+// npm i @emailjs/browser styled-components
 
-  const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [message, setMessage] = useState<string>('');
+const Contact = () => {
+  // Explicitly tell TypeScript this ref will hold an HTMLFormElement
+  const form = useRef<HTMLFormElement>(null);
 
-  const [nameError, setNameError] = useState<boolean>(false);
-  const [emailError, setEmailError] = useState<boolean>(false);
-  const [messageError, setMessageError] = useState<boolean>(false);
-
-  const form = useRef();
-
-  const sendEmail = (e: any) => {
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setNameError(name === '');
-    setEmailError(email === '');
-    setMessageError(message === '');
+    if (!form.current) return; // safeguard
 
-    /* Uncomment below if you want to enable the emailJS */
-
-    if (name !== '' && email !== '' && message !== '') {
-      var templateParams = {
-        name: name,
-        email: email,
-        message: message
-      };
-
-      console.log(templateParams);
-      emailjs.send('service_id', 'template_id', templateParams, 'api_key').then(
-        (response) => {
-          console.log('SUCCESS!', response.status, response.text);
+    emailjs
+      .sendForm(
+        "replace with service id",
+        "replace with template id",
+        form.current,
+        "replace with user id"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          console.log("message sent");
         },
         (error) => {
-          console.log('FAILED...', error);
-        },
+          console.log(error.text);
+        }
       );
-      setName('');
-      setEmail('');
-      setMessage('');
-    }
   };
 
   return (
     <StyledContactForm>
       <form ref={form} onSubmit={sendEmail}>
         <label>Name</label>
-        <input type="text" name="user_name" />
+        <input type="text" name="user_name" required />
         <label>Email</label>
-        <input type="email" name="user_email" />
+        <input type="email" name="user_email" required />
         <label>Message</label>
-        <textarea name="message" />
+        <textarea name="message" required />
         <input type="submit" value="Send" />
       </form>
     </StyledContactForm>
