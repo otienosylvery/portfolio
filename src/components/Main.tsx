@@ -2,7 +2,7 @@ import React from "react";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import '../assets/styles/Main.scss';
-import profileImage from './profile-image.jpg'
+import profileImage from '../assets/images/profile-image.jpg'
 
 function Main() {
 
