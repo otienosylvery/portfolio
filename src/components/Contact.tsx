@@ -1,103 +1,129 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import styled from "styled-components";
+import { Box, Button, TextField, Grid } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 
-// npm i @emailjs/browser styled-components
-
-const Contact = () => {
-  // Explicitly tell TypeScript this ref will hold an HTMLFormElement
+const Contact: React.FC = () => {
   const form = useRef<HTMLFormElement>(null);
+
+  const [formData, setFormData] = useState({
+    user_name: "",
+    user_email: "",
+    message: "",
+  });
+
+  // Handle input changes
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (!form.current) return; // safeguard
+    if (!form.current) return;
 
     emailjs
       .sendForm(
-        "replace with service id",
-        "replace with template id",
+        "your_service_id",   // Replace with your EmailJS service ID
+        "your_template_id",  // Replace with your template ID
         form.current,
-        "replace with user id"
+        "your_public_key"    // Replace with your public key
       )
       .then(
         (result) => {
           console.log(result.text);
-          console.log("message sent");
+          console.log("message sent ✅");
+          setFormData({ user_name: "", user_email: "", message: "" });
+          form.current?.reset();
         },
         (error) => {
-          console.log(error.text);
+          console.error("Email error:", error.text);
         }
       );
   };
 
   return (
-    <StyledContactForm>
-      <form ref={form} onSubmit={sendEmail}>
-        <label>Name</label>
-        <input type="text" name="user_name" required />
-        <label>Email</label>
-        <input type="email" name="user_email" required />
-        <label>Message</label>
-        <textarea name="message" required />
-        <input type="submit" value="Send" />
-      </form>
-    </StyledContactForm>
+    <div id="contact">
+      <div className="items-container">
+        <div className="contact_wrapper">
+          <h1>Contact Me</h1>
+          <p>
+            Got a project waiting to be realized? Let's collaborate and make it happen!
+          </p>
+
+          <Box
+            component="form"
+            ref={form}
+            onSubmit={sendEmail}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              justifyContent: "center",
+              backgroundColor: "#f9f9f9",
+              padding: 3,
+              borderRadius: 2,
+              boxShadow: 2,
+            }}
+          >
+            {/* Responsive Name + Email */}
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  required
+                  fullWidth
+                  name="user_name"
+                  label="Your Name"
+                  placeholder="What's your name?"
+                  value={formData.user_name}
+                  onChange={handleChange}
+                  sx={{ backgroundColor: "white", borderRadius: 1 }}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  required
+                  fullWidth
+                  name="user_email"
+                  type="email"
+                  label="Your Email"
+                  placeholder="Your email address"
+                  value={formData.user_email}
+                  onChange={handleChange}
+                  sx={{ backgroundColor: "white", borderRadius: 1 }}
+                />
+              </Grid>
+            </Grid>
+
+            {/* Message */}
+            <TextField
+              required
+              fullWidth
+              name="message"
+              label="Message"
+              placeholder="Your message"
+              multiline
+              rows={4}
+              value={formData.message}
+              onChange={handleChange}
+              sx={{ backgroundColor: "white", borderRadius: 1 }}
+            />
+
+            {/* Submit */}
+            <Button
+              variant="contained"
+              type="submit"
+              endIcon={<SendIcon />}
+              sx={{ alignSelf: "flex-end" }}
+            >
+              Send
+            </Button>
+          </Box>
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default Contact;
-
-// Styles
-const StyledContactForm = styled.div`
-  width: 400px;
-
-  form {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    width: 100%;
-    font-size: 16px;
-
-    input {
-      width: 100%;
-      height: 35px;
-      padding: 7px;
-      outline: none;
-      border-radius: 5px;
-      border: 1px solid rgb(220, 220, 220);
-
-      &:focus {
-        border: 2px solid rgba(0, 206, 158, 1);
-      }
-    }
-
-    textarea {
-      max-width: 100%;
-      min-width: 100%;
-      width: 100%;
-      max-height: 100px;
-      min-height: 100px;
-      padding: 7px;
-      outline: none;
-      border-radius: 5px;
-      border: 1px solid rgb(220, 220, 220);
-
-      &:focus {
-        border: 2px solid rgba(0, 206, 158, 1);
-      }
-    }
-
-    label {
-      margin-top: 1rem;
-    }
-
-    input[type="submit"] {
-      margin-top: 2rem;
-      cursor: pointer;
-      background: rgb(249, 105, 14);
-      color: white;
-      border: none;
-    }
-  }
-`;
