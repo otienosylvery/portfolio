@@ -1,68 +1,52 @@
-import React, { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
-import {
-  Box,
-  Button,
-  TextField,
-  Grid,
-  Snackbar,
-  Alert,
-  Slide,
-  SlideProps,
-} from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
+import React, { useRef, useState } from 'react';
+import '../assets/styles/Contact.scss';
+import emailjs from '@emailjs/browser';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+import TextField from '@mui/material/TextField';
 
-function SlideTransition(props: SlideProps) {
-  return <Slide {...props} direction="left" />; // Slide in from the right
-}
+function Contact() {
 
-const Contact: React.FC = () => {
-  const form = useRef<HTMLFormElement>(null);
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [message, setMessage] = useState<string>('');
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [nameError, setNameError] = useState<boolean>(false);
+  const [emailError, setEmailError] = useState<boolean>(false);
+  const [messageError, setMessageError] = useState<boolean>(false);
 
-  const [loading, setLoading] = useState(false);
-  const [alert, setAlert] = useState<{
-    open: boolean;
-    message: string;
-    type: "success" | "error";
-  }>({ open: false, message: "", type: "success" });
+  const form = useRef();
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+  const sendEmail = (e: any) => {
     e.preventDefault();
-    if (!form.current) return;
 
-    setLoading(true);
+    setNameError(name === '');
+    setEmailError(email === '');
+    setMessageError(message === '');
 
-    emailjs
-      .sendForm("contact_service", "contact_form", form.current, "SFZiKygRAWzbVx1Mw")
-      .then(() => {
-        setAlert({
-          open: true,
-          message: "Message sent successfully ✅",
-          type: "success", // green alert
-        });
-        setFormData({ name: "", email: "", message: "" });
-        form.current?.reset();
-      })
-      .catch(() => {
-        setAlert({
-          open: true,
-          message: "Something went wrong ❌ Please try again",
-          type: "error", // red alert
-        });
-      })
-      .finally(() => setLoading(false));
+    /* Uncomment below if you want to enable the emailJS */
+
+    if (name !== '' && email !== '' && message !== '') {
+      var templateParams = {
+        name: name,
+        email: email,
+        message: message
+      };
+
+      console.log(templateParams);
+      emailjs.send('service_id', 'template_id', templateParams, 'api_key').then(
+        (response) => {
+          console.log('SUCCESS!', response.status, response.text);
+        },
+        (error) => {
+          console.log('FAILED...', error);
+        },
+      );
+      setName('');
+      setEmail('');
+      setMessage('');
+    }
   };
 
   return (
@@ -70,114 +54,63 @@ const Contact: React.FC = () => {
       <div className="items-container">
         <div className="contact_wrapper">
           <h1>Contact Me</h1>
-          <p>
-            Got a project waiting to be realized? Let's collaborate and make it happen!
-          </p>
-
+          <p>Got a project waiting to be realized? Let's collaborate and make it happen!</p>
           <Box
-            component="form"
             ref={form}
-            onSubmit={sendEmail}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 2,
-              justifyContent: "center",
-              backgroundColor: "#f9f9f9",
-              padding: 3,
-              borderRadius: 2,
-              boxShadow: 2,
-            }}
+            component="form"
+            noValidate
+            autoComplete="off"
+            className='contact-form'
           >
-            {/* Responsive Name + Email */}
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={6}>
-                <TextField
-                  required
-                  fullWidth
-                  name="name"
-                  label="Your Name"
-                  placeholder="What's your name?"
-                  value={formData.name}
-                  onChange={handleChange}
-                  sx={{ backgroundColor: "white", borderRadius: 1 }}
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <TextField
-                  required
-                  fullWidth
-                  name="email"
-                  type="email"
-                  label="Your Email"
-                  placeholder="Your email address"
-                  value={formData.email}
-                  onChange={handleChange}
-                  sx={{ backgroundColor: "white", borderRadius: 1 }}
-                />
-              </Grid>
-            </Grid>
-
-            {/* Message */}
+            <div className='form-flex'>
+              <TextField
+                required
+                id="outlined-required"
+                label="Your Name"
+                placeholder="What's your name?"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+                error={nameError}
+                helperText={nameError ? "Please enter your name" : ""}
+              />
+              <TextField
+                required
+                id="outlined-required"
+                label="Email / Phone"
+                placeholder="How can I reach you?"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+                error={emailError}
+                helperText={emailError ? "Please enter your email or phone number" : ""}
+              />
+            </div>
             <TextField
               required
-              fullWidth
-              name="message"
+              id="outlined-multiline-static"
               label="Message"
-              placeholder="Your message"
+              placeholder="Send me any inquiries or questions"
               multiline
-              rows={4}
-              value={formData.message}
-              onChange={handleChange}
-              sx={{ backgroundColor: "white", borderRadius: 1 }}
+              rows={10}
+              className="body-form"
+              value={message}
+              onChange={(e) => {
+                setMessage(e.target.value);
+              }}
+              error={messageError}
+              helperText={messageError ? "Please enter the message" : ""}
             />
-
-            {/* Submit */}
-            <Button
-              variant="contained"
-              type="submit"
-              endIcon={!loading && <SendIcon />}
-              disabled={loading}
-              sx={{ 
-                alignSelf: "flex-end",
-                backgroundColor:"#1976d2",
-                transition: "all 0.3s ease",
-                "&:hover":{
-                  backgroundColor: "#115293", // darker shade
-      transform: "scale(1.05)",   // slight zoom
-      boxShadow: "0 4px 12px rgba(0,0,0,0.2)", // subtle shadow
-                },
-                "&:disabled": {
-      backgroundColor: "#9e9e9e", // greyed out when disabled
-      transform: "none",
-      boxShadow: "none",
-    },
-               }}
-            >
-              {loading ? "Sending..." : "Send"}
+            <Button variant="contained" endIcon={<SendIcon />} onClick={sendEmail}>
+              Send
             </Button>
           </Box>
         </div>
       </div>
-
-      {/* Snackbar with slide animation */}
-      <Snackbar
-        open={alert.open}
-        autoHideDuration={4000}
-        onClose={() => setAlert({ ...alert, open: false })}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        TransitionComponent={SlideTransition}
-      >
-        <Alert
-          onClose={() => setAlert({ ...alert, open: false })}
-          severity={alert.type} // 👈 success = green, error = red
-          sx={{ width: "100%" }}
-        >
-          {alert.message}
-        </Alert>
-      </Snackbar>
     </div>
   );
-};
+}
 
 export default Contact;
