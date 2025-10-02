@@ -15,32 +15,39 @@ function Project() {
             <div className="project">
                 <a href="https://www.kesra.ac.ke/" target="_blank" rel="noreferrer"><img src={kesra_web} className="zoom" alt="thumbnail" width="100%"/></a>
                 <a href="https://www.kesra.ac.ke/" target="_blank" rel="noreferrer"><h2>KESRA Website</h2></a>
-                <p>Developed movie finder app with semantic search and sentiment analysis using OpenAI GPT-3.5 Turbo, Qdrant, React, and Flask.</p>
+                <p>Developed The Kenya Revenue Authority (KRA) website that serves as the central hub for individuals and businesses in Kenya to fulfill their tax obligations and interact with the revenue authority digitally.</p>
             </div>
             <div className="project">
                 <a href="https://play.google.com/store/apps/details?id=kra.kesra.bdm.kesramobile&pcampaignid=web_share" target="_blank" rel="noreferrer"><img src={kesra_android} className="zoom" alt="thumbnail" width="100%"/></a>
                 <a href="https://play.google.com/store/apps/details?id=kra.kesra.bdm.kesramobile&pcampaignid=web_share" target="_blank" rel="noreferrer"><h2>KESRA Mobile App</h2></a>
-                <p>Designed, developed, and launched a 3D multiplayer racing game with C# and Unity. This is available on Itch.io for gamers worldwide to enjoy.</p>
+                <p>Developed the KESRA Mobile App. An educational tool designed for current and prospective students who want to study tax, customs, and fiscal management. Offered by The Kenya School Of Revenue Administration.
+                    This is available on Google Play Store.
+                </p>
             </div>
             <div className="project">
                 <a href="https://play.google.com/store/apps/details?id=ke.go.kra.mobileworkspace&pcampaignid=web_share" target="_blank" rel="noreferrer"><img src={staff_app} className="zoom" alt="thumbnail" width="100%"/></a>
                 <a href="https://play.google.com/store/apps/details?id=ke.go.kra.mobileworkspace&pcampaignid=web_share" target="_blank" rel="noreferrer"><h2>KRA Staff App</h2></a>
-                <p>Developed and released a 2D shooting game with C# and Unity. This project is hosted on the Itch.io public marketplace.</p>
+                <p>Built using Kotlin, this application is designed specifically for KRA employees to enjoy the convenience of mobile telephony in their work duties.</p>
             </div>
             <div className="project">
                 <a href="https://www.kra.go.ke/" target="_blank" rel="noreferrer"><img src={kra_web} className="zoom" alt="thumbnail" width="100%"/></a>
                 <a href="https://www.kra.go.ke/" target="_blank" rel="noreferrer"><h2>KRA Website</h2></a>
-                <p>This is an online educational platform that provides high-quality, data science-focused learning resources in the Japanese language. I created the entire platform from scratch using Ruby on Rails.</p>
+                <p>The Kenya Revenue Authority (KRA) website, which is built around its iTax platform, offers a comprehensive suite of online services for taxpayers and the public, primarily related to tax and customs administration.
+                     The website also contains news, updates, press releases, tutorials, and career opportunities at KRA.
+                </p>
             </div>
             <div className="project">
                 <a href="https://unicool.co.ke/" target="_blank" rel="noreferrer"><img src={unicool_web} className="zoom" alt="thumbnail" width="100%"/></a>
                 <a href="https://unicool.co.ke/" target="_blank" rel="noreferrer"><h2>Unicool Website</h2></a>
-                <p>This mobile application allows realtors in Japan to securely manage their property information and view future income predictions. This app is built with Ruby on Rails and JavaScript.</p>
+                <p>Unicool International Limited offers proffesional cooling solutions for businesses. The website allows prospective customers to reach out to Unicool for enquires and service bookings.</p>
             </div>
             <div className="project">
                 <a href="https://play.google.com/store/apps/details?id=com.kra.mservices&pcampaignid=web_share" target="_blank" rel="noreferrer"><img src={m_service_app} className="zoom" alt="thumbnail" width="100%"/></a>
                 <a href="https://play.google.com/store/apps/details?id=com.kra.mservices&pcampaignid=web_share" target="_blank" rel="noreferrer"><h2>KRA M-Service App</h2></a>
-                <p>Built official charts for COVID/vaccination tracking for an educational institution using JavaScript and the Google Sheets API v4. The dashboard served the university's leadership in their decision-making processes.</p>
+                <p>Developer using Kotlin, the KRA M-Service App streamlines tax compliance by putting essential filing, payment, and verification services directly on your mobile device.
+                    This application is available on Google Play Store.
+
+</p>
             </div>
         </div>
     </div>
